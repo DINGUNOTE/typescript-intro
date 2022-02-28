@@ -44,5 +44,4 @@ emails.forEach(function(email) {
 numberOfProducts.forEach(function(product) {
   const item = createDropdownItem(product);
   document.querySelector('#product-dropdown').appendChild(item);
-  
 })
