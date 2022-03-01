@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "target": "es5",
+    "lib": ["es2015", "dom", "dom.iterable"],
+    "noImplicitAny": true, // 암묵적으로 any를 추론하게 하지 않고 최소한 any라도 선언해야 한다.
+    "strict": true,
+    "strictFunctionTypes": true,
+  },
+  "include": ["./src/**/*"]
+}
