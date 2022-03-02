@@ -15,7 +15,7 @@ class Person {
   skill: string;
 }
 
-var developer: Developer;
+var developer: Developer; 
 var person: Person;
 developer = new Person();
 
