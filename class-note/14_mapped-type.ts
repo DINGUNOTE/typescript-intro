@@ -10,4 +10,4 @@ const ages: HeroAges = {
 var arr = ['a', 'b', 'c'];
 for (var key in arr) {
   console.log(arr[key]);
-}
+} 
