@@ -71,5 +71,3 @@ type UserProfileUpdate = {
 type Subset<T> = {
   [p in keyof T]?: T[p]
 }
-
-const obj: Partial
