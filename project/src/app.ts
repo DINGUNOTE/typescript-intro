@@ -1,5 +1,6 @@
-import axios from 'axios';
-import * as Chart from 'chart.js/auto'; // export 된 모든 요소를 가져온다 Chart라고 명명해서
+import axios, { AxiosResponse } from 'axios';
+import * as Chart from 'chart.js/'; // export 된 모든 요소를 가져온다 Chart라고 명명해서
+import { CountrySummaryResponse, CovidSummaryResponse } from './covid/index';
 
 // utils
 function $(selector: string) {
@@ -40,7 +41,7 @@ let isDeathLoading = false;
 const isRecoveredLoading = false;
 
 // api
-function fetchCovidSummary() {
+function fetchCovidSummary(): Promise<AxiosResponse<CovidSummaryResponse>> {
   const url = 'https://api.covid19api.com/summary';
   return axios.get(url);
 }
@@ -51,7 +52,10 @@ enum CovidStatus {
   Deaths = 'deaths',
 }
 
-function fetchCountryInfo(countryCode: string, status: CovidStatus) {
+function fetchCountryInfo(
+  countryCode: string,
+  status: CovidStatus
+): Promise<AxiosResponse<CountrySummaryResponse>> {
   // params: confirmed, recovered, deaths
   const url = `https://api.covid19api.com/country/${countryCode}/status/${status}`;
   return axios.get(url);
@@ -179,7 +183,7 @@ async function setupData() {
 }
 
 function renderChart(data: any, labels: any) {
-  const ctx = $('#lineChart').getContext('2d');
+  const ctx = $('#lineChart').getContext('2d') as HTMLCanvasElement;
   Chart.defaults.color = '#f5eaea';
   Chart.defaults.font.family = 'Exo 2';
   new Chart(ctx, {
@@ -209,7 +213,7 @@ function setChartData(data: any) {
   renderChart(chartData, chartLabel);
 }
 
-function setTotalConfirmedNumber(data: any) {
+function setTotalConfirmedNumber(data: CovidSummaryResponse) {
   confirmedTotal.innerText = data.Countries.reduce(
     (total: any, current: any) => (total += current.TotalConfirmed),
     0
